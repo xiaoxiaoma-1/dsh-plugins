@@ -68,7 +68,7 @@ node install.mjs --profile 别的   # 装到别的 profile
 
 **几个设计上的讲究：**
 
-- **分组挑选**：`--pick` 会把 14 个插件按「记忆与看板 / 工作台 / 桌面交互 / 语音 / 小工具」五组列出来，输编号就行，直接回车等于全装
+- **分组挑选**：`--pick` 会把 13 个插件按「记忆与看板 / 工作台 / 桌面交互 / 语音 / 小工具」五组列出来，输编号就行，直接回车等于全装
 - **自动补前置**：装「自媒体工作台」会**先自动装「工作台入口」**——不然台子装上了，侧边栏没地方点进去。这类依赖写在每个包 `package.json` 的 `dsh.requires` 里，安装器会做拓扑排序
 - **要脚本的会被标出来**：带 `needs-scripts` 标记的插件（工作台、截图、语音、桌宠这几个），装完会提醒你「这些还要本机脚本才能干活，见 setup/scripts/README.md」
 - **默认不全装**：`node install.mjs` 不带参数时，会跳过 `needs-scripts` 的包，只装开箱能用的。要连它一起装就加 `--with-scripts`
@@ -93,7 +93,6 @@ node install.mjs --profile 别的   # 装到别的 profile
 | `my-memory` | 长期记忆。七层（soul/user/project/fact/lesson/topic/rules）+ 经验包，跨会话检索，带记忆星云图 |
 | `dsh-work-board` | 工作看板。卡片分「待完成/进行中/阶段完成/已完成」四栏 |
 | `dsh-workbench-hub` | 工作台聚合入口，把几个工作台收在一个地方 |
-| `dsh-jarvis` | 语音唤醒 + 播报（贾维斯式） |
 | `dsh-call` | 语音通话通道：手机/微信侧说话，AI 在这台机器上干活 |
 | `dsh-shot` | 截图工具：区域截图 → 存盘 → 回传路径给 AI |
 | `dsh-pet` | 桌面宠物，会把进度冒泡报给你 |
@@ -137,7 +136,6 @@ window.dispatchEvent(new Event('dsh-workbench-changed'))
 | `dsh-shot` | `OUT_DIR` 默认 `E:\desktop\shots`，得改成你自己的目录；另需 `SnippingTool.exe`（Win10/11 自带） |
 | `dsh-pet` / `dsh-bubble` | `DSH_PET_PY`、`DSH_PET_SCRIPT`（pythonw + 桌宠脚本） |
 | `dsh-finance-health` | `DSH_FINANCE_DIR`（数据目录）、`DSH_FINANCE_PYTHON` |
-| `dsh-jarvis` | `DSH_HOME`（默认 `~/.dsh`） |
 | `dsh-rea` | 需要 JDK、Ghidra、rizin、apktool，路径在 `index.js` 顶部 |
 | `my-memory` | 无外部依赖，装了就能用；数据存在 `~/.my-memory/memory.db` |
 

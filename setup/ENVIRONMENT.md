@@ -89,7 +89,6 @@ openai / requests / httpx  调用模型接口
 | `dsh-ziwei` | C2、C3、npm `iztro` |
 | `dsh-ponytail-lazy` | C2、C3 |
 | `dsh-purge-console` | C2、C3 |
-| `dsh-jarvis` | C2、C3、C4（语音播报） |
 | `dsh-call` | C2、C3、C4、Python 包（funasr/edge-tts）+ `speech_server.py` |
 | `dsh-bubble` | C2、C3、C4（桌宠进程） |
 | `dsh-pet` | C2、C3、C4 + `dsh-pet.py` |
