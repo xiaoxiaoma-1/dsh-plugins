@@ -1,9 +1,0 @@
-# 破甲控制台：只挂客户端（设置页里的一个分节），不注册任何 host 工具。
-# 所有功能都走 dsh-purge 自己的同源 HTTP 接口（/dsh-purge/status|apply|revert|restart|hooks-deny），
-# 因此 dsh-purge 升级换代时本插件不受影响。
-
-- insert:
-    - id: dsh-purge-console
-      name: 'dsh-purge-console'
-      config:
-        enabled: true

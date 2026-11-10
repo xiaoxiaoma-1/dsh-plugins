@@ -1,0 +1,13 @@
+import sqlite3
+c = sqlite3.connect(r'E:\desktop\media\workbench.db')
+q = lambda s: c.execute(s).fetchall()
+print('books', q('select count(*) from books')[0][0])
+print('chunks', q('select count(*) from book_chunks')[0][0])
+print('chars', q('select sum(chars) from book_chunks')[0][0])
+print('labeled_books', q('select count(distinct book_id) from book_labels')[0][0])
+print('residual_lt5000', q('select count(*) from (select b.id, sum(c.chars) n from books b join book_chunks c on c.book_id=b.id group by b.id having n<5000)')[0][0])
+print('zero_chunk_books', q('select count(*) from books b where not exists(select 1 from book_chunks c where c.book_id=b.id)')[0][0])
+print('zero_chunk_list', q("select b.id,b.title,b.pages from books b where not exists(select 1 from book_chunks c where c.book_id=b.id) limit 10"))
+print('tables', [r[0] for r in q("select name from sqlite_master where type='table'")])
+print('top_books_chars', q('select b.title,sum(c.chars) n from books b join book_chunks c on c.book_id=b.id group by b.id order by n desc limit 3'))
+print('thin_100', q('select count(*) from (select b.id, sum(c.chars) n from books b join book_chunks c on c.book_id=b.id group by b.id having n<100)')[0][0])

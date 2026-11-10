@@ -13,23 +13,23 @@ import path from 'node:path'
 import { spawn } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 
-const HOT_DIR = 'E:\\desktop\\hot'
-const DB = 'E:\\desktop\\media\\workbench.db'
-const PY = 'E:\\tools\\asr\\.venv\\Scripts\\python.exe'
-const SCRIPT = 'E:\\tools\\asr\\hotdaily.py'
-const I18N_SCRIPT = 'E:\\tools\\asr\\hot_i18n.py'
-const IDEA_SCRIPT = 'E:\\tools\\asr\\daily_idea.py'
-const WBQ = 'E:\\desktop\\media\\wbquery.py'
-const BOOKS_Q = 'E:\\desktop\\media\\books_query.py'
-const DASH_CTL = 'E:\\desktop\\书库盘点\\split_ctl.py'
-const DASH_STATS = 'E:\\desktop\\书库盘点\\dash_stats.py'
-const LINK_ROUTER = 'E:\\desktop\\media\\link_router.py'
-const OCR_STATUS = 'E:\\desktop\\书库盘点\\ocr_status.py'
+const HOT_DIR = dataPath('hot')
+const DB = dataPath('media', 'workbench.db')
+const PY = (process.env.DSH_PYTHON || path.join(TOOLS_ROOT, 'asr', '.venv', 'Scripts', 'python.exe'))
+const SCRIPT = pyPath('asr', 'hotdaily.py')
+const I18N_SCRIPT = pyPath('asr', 'hot_i18n.py')
+const IDEA_SCRIPT = pyPath('asr', 'daily_idea.py')
+const WBQ = pyPath('media', 'wbquery.py')
+const BOOKS_Q = pyPath('media', 'books_query.py')
+const DASH_CTL = pyPath('shuku', 'split_ctl.py')
+const DASH_STATS = pyPath('shuku', 'dash_stats.py')
+const LINK_ROUTER = pyPath('media', 'link_router.py')
+const OCR_STATUS = pyPath('shuku', 'ocr_status.py')
 
 /* ---- 直播录制（DouyinLiveRecorder）磁盘状态，按平台分组 ---- */
-const LIVE_ROOT = 'D:\\采数据\\直播录制'          // 下面按平台分目录：抖音直播 / 小红书直播 / B站直播 ...
-const LIVE_TR_ROOT = 'D:\\采数据\\逐字稿\\直播录制'
-const LIVE_PIPE_STATE = 'E:\\tools\\DouyinLiveRecorder\\.pipeline_state.json'
+const LIVE_ROOT = dataPath('live', 'rec')          // 下面按平台分目录：抖音直播 / 小红书直播 / B站直播 ...
+const LIVE_TR_ROOT = dataPath('live', 'transcript')
+const LIVE_PIPE_STATE = path.join(TOOLS_ROOT, 'DouyinLiveRecorder', '.pipeline_state.json')
 const LIVE_PIPE_LOG = 'E:\\tools\\DouyinLiveRecorder\\logs\\pipeline.log'
 const LIVE_CFG = 'E:\\tools\\DouyinLiveRecorder\\config'
 const LIVE_FOLLOW = 'E:\\tools\\DouyinLiveRecorder\\.follow_status.json'
@@ -38,19 +38,19 @@ const LIVE_PAUSE = 'E:\\tools\\DouyinLiveRecorder\\.pause_record'
 const XHS_FOLLOW_SCRIPT = 'E:\\tools\\DouyinLiveRecorder\\xhs_follow_live.py'
 const XHS_FOLLOW_JSON = 'E:\\tools\\DouyinLiveRecorder\\.xhs_follow_live.json'
 // playwright 装在系统 python，asr 的 venv 里没有
-const PY_SYS = 'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python312\\python.exe'
+const PY_SYS = (process.env.DSH_PYTHON || path.join(process.env.LOCALAPPDATA || '', 'Programs', 'Python', 'Python312', 'python.exe'))
 // GitHub 热榜：collect.py 抓取入库，query.py 出 JSON，intro.py 写简介，judge.py 记判断
-const GH_QUERY = 'E:\\desktop\\github_trending\\query.py'
-const GH_COLLECT = 'E:\\desktop\\github_trending\\collect.py'
-const GH_INTRO = 'E:\\desktop\\github_trending\\intro.py'
-const GH_JUDGE = 'E:\\desktop\\github_trending\\judge.py'
+const GH_QUERY = pyPath('gh', 'query.py')
+const GH_COLLECT = pyPath('gh', 'collect.py')
+const GH_INTRO = pyPath('gh', 'intro.py')
+const GH_JUDGE = pyPath('gh', 'judge.py')
 // AI 简介走本机 OpenAI 兼容网关（硅基流动 V3.2）。换 key 用环境变量覆盖，不写死新路径。
 const GH_INTRO_BASE = process.env.DSH_INTRO_BASE || 'http://127.0.0.1:8326/v1'
 const GH_INTRO_KEY_FILE = process.env.DSH_INTRO_KEY_FILE || 'E:\\DSH-data\\.dsh\\openai-gateway\\api-key'
 const GH_INTRO_MODEL = process.env.DSH_INTRO_MODEL || 'siliconflow/deepseek-ai/DeepSeek-V3.2'
 const WORK_BOARD_FILE = path.join(process.env.DSH_HOME || path.join(os.homedir(), '.dsh'), 'work-board', 'board.json')
 // 拆解条目 → 原文出处（书查 book_chunks / 稿查 posts）
-const SPLIT_SOURCE = 'E:\\desktop\\media\\split_source.py'
+const SPLIT_SOURCE = pyPath('media', 'split_source.py')
 
 // 录制器目录名 → 界面上的平台名。没列到的就去掉结尾「直播」
 const PLATFORM_LABEL = {
@@ -150,7 +150,7 @@ export function liveStatusNow() {
   let state = {}
   try { state = JSON.parse(readTextSafe(LIVE_PIPE_STATE) || '{}') } catch { state = {} }
   let pipe = {}
-  try { pipe = JSON.parse(readTextSafe('E:\\tools\\DouyinLiveRecorder\\.pipeline_status.json') || '{}') } catch { }
+  try { pipe = JSON.parse(readTextSafe(path.join(TOOLS_ROOT, 'DouyinLiveRecorder', '.pipeline_status.json')) || '{}') } catch { }
   // 正在转写的分段不算「待转写」，否则数字会重复
   const runningKeys = new Set((pipe.running || []).map((r) => r.anchor + '/' + r.name))
   let done = 0
@@ -231,7 +231,7 @@ export function liveStatusNow() {
     known: KNOWN_PLATFORMS,
     monitored: configured,
     monitoredBy,
-    paths: { rec: LIVE_ROOT, transcript: LIVE_TR_ROOT, book: 'E:\\wengao' },
+    paths: { rec: LIVE_ROOT, transcript: LIVE_TR_ROOT, book: dataPath('wengao') },
     paused,
     follow: {
       live: follow.followedLive || 0,
@@ -413,7 +413,7 @@ function hasTodayIdea() {
 }
 
 /* ---------------- 采集队列：收下的链接自动转写入库 ---------------- */
-const CAPTURE = 'E:\\tools\\asr\\capture_one.py'
+const CAPTURE = pyPath('asr', 'capture_one.py')
 let capQueue = []          // [{url, status:'pending'|'running'|'done'|'failed', at, result, error}]
 let capRunning = false
 
@@ -620,7 +620,7 @@ function dbStats() {
 
 /* ---------------- AI 讲透：流式调用默认模型 ---------------- */
 
-const SETTINGS_FILE = 'E:\\desktop\\media\\settings.json'
+const SETTINGS_FILE = dataPath('media', 'settings.json')
 
 function readSettings() {
   try { return readJson(SETTINGS_FILE) || {} } catch { return {} }
@@ -1129,7 +1129,7 @@ function autoStatus() {
 
 /* ---------------- 剪贴板哨兵 ---------------- */
 
-const CLIP_PS1 = 'E:\\tools\\asr\\clipwatch.ps1'
+const CLIP_PS1 = pyPath('asr', 'clipwatch.ps1')
 const DOUYIN_RE = /https?:\/\/v\.douyin\.com\/[A-Za-z0-9_\-]+\/?/i
 const DOUYIN_RE2 = /https?:\/\/(?:www\.)?douyin\.com\/video\/\d+/i
 
@@ -1218,8 +1218,8 @@ export function apply(ctx) {
   // DSH 每次启动 → 扫一次有没有新入库的内容需要提炼成观点（跑完就退，不常驻）
   // 用户要求：只在打开 DSH 时扫，不要定时轮询
   try {
-    const PY = 'C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python312\\pythonw.exe'
-    const SCRIPT = 'E:\\desktop\\media\\auto_extract.py'
+    const PY = (process.env.DSH_PYTHON || path.join(process.env.LOCALAPPDATA || '', 'Programs', 'Python', 'Python312', 'pythonw.exe'))
+    const SCRIPT = pyPath('media', 'auto_extract.py')
     if (fs.existsSync(PY) && fs.existsSync(SCRIPT)) {
       setTimeout(() => {
         try {
@@ -1246,7 +1246,7 @@ export function apply(ctx) {
           })
           req.on('error', () => {
             try {
-              const q = spawn(PY, ['E:\\desktop\\media\\mobile_server.py'], {
+              const q = spawn(PY, [pyPath('media', 'mobile_server.py')], {
                 detached: true, stdio: 'ignore', windowsHide: true, cwd: 'E:\\desktop\\media',
               })
               q.unref()
@@ -1262,7 +1262,7 @@ export function apply(ctx) {
       // 记忆自我迭代：7 天内没跑过就扫一遍「反复被纠正但没进 AGENTS.md」的教训，自动晋升
       setTimeout(() => {
         try {
-          const mp = 'E:\\desktop\\media\\memory_promote.py'
+          const mp = pyPath('media', 'memory_promote.py')
           if (fs.existsSync(mp)) {
             const q = spawn(PY, [mp, '--if-due'], {
               detached: true, stdio: 'ignore', windowsHide: true, cwd: 'E:\\desktop\\media',
@@ -1851,7 +1851,7 @@ export function apply(ctx) {
 
   /* ---------- 口播训练（能力提升） ---------- */
   const SPEECH_PORT = 8777
-  const SPEECH_SCRIPT = 'E:\\tools\\asr\\speech_server.py'
+  const SPEECH_SCRIPT = pyPath('asr', 'speech_server.py')
   let speechChild = null
 
   async function ensureSpeech() {
@@ -1941,7 +1941,7 @@ export function apply(ctx) {
   })
 
   /* ---------- 分身（角色）与圆桌会议 ---------- */
-  const PERSONAS_FILE = 'E:\\desktop\\media\\personas.json'
+  const PERSONAS_FILE = dataPath('media', 'personas.json')
 
   function loadPersonas() {
     try {
@@ -2152,7 +2152,7 @@ ${src || '（无）'}
   })
 
   /* ---------- 圆桌会议：带存档 + 追问 ---------- */
-  const RT_FILE = 'E:\\desktop\\media\\roundtable.json'
+  const RT_FILE = dataPath('media', 'roundtable.json')
 
   function loadRT() {
     try {
@@ -2343,7 +2343,7 @@ ${(atoms || []).map((a, i) => `[${i + 1}] ${String(a.knowledge || '').slice(0, 1
     }
     const md = lines.join('\n')
     try {
-      const dir = 'E:\\desktop\\media\\exports'
+      const dir = dataPath('media', 'exports')
       fs.mkdirSync(dir, { recursive: true })
       const safe = String(t.question).replace(/[\\/:*?"<>|\s]+/g, '_').slice(0, 40)
       const file = path.join(dir, '圆桌_' + t.createdAt.replace(/[: ]/g, '-') + '_' + safe + '.md')
@@ -2398,7 +2398,7 @@ ${(atoms || []).map((a, i) => `[${i + 1}] ${String(a.knowledge || '').slice(0, 1
     }
     const md = parts.join('\n')
     try {
-      const dir = 'E:\\desktop\\media\\exports'
+      const dir = dataPath('media', 'exports')
       fs.mkdirSync(dir, { recursive: true })
       const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')
       const file = path.join(dir, '圆桌合集_' + stamp + '_' + picked.length + '场.md')
@@ -2445,7 +2445,7 @@ ${(atoms || []).map((a, i) => `[${i + 1}] ${String(a.knowledge || '').slice(0, 1
   clipRoute('/api/dsh-media/open', ['POST'], async (req) => {
     let body = {}
     try { body = await req.json() } catch { }
-    const map = { rec: LIVE_ROOT, transcript: LIVE_TR_ROOT, book: 'E:\\wengao' }
+    const map = { rec: LIVE_ROOT, transcript: LIVE_TR_ROOT, book: dataPath('wengao') }
     const p = map[String(body.which || '')]
     if (!p) return Response.json({ ok: false, error: 'unknown target' })
     let ps1 = ''
@@ -2518,7 +2518,7 @@ ${(atoms || []).map((a, i) => `[${i + 1}] ${String(a.knowledge || '').slice(0, 1
    * 选题池 / 我的观点 / 我的语料库
    * 数据层：pool_db.py（pool_topics 与 my_views 两张表，和稿库物理隔离）
    * ================================================================== */
-  const POOL_DB = 'E:\\desktop\\media\\pool_db.py'
+  const POOL_DB = pyPath('media', 'pool_db.py')
   const POOL_DIMS = ['普世性', '数字冲击', '反常识', '可操作', '痛点强度', '时效性', '争议空间', '经验可挂', '能落到动作', '标题性']
 
   /* 带 stdin 的 python 调用（写数据用） */
