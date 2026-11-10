@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 心印 — 黑白星座：与侧栏「脉络」图标同一套符号，去掉所有颜色 -->
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#141417"/>
+
+  <g stroke="#ffffff" fill="none" stroke-linecap="round">
+    <!-- 外圈：六边形，跳过邻边的暗线 -->
+    <path d="M32 10 L51 21 L51 43 L32 54 L13 43 L13 21 Z" stroke-width="0.9" opacity="0.22"/>
+    <!-- 中心辐射 -->
+    <path d="M32 32 L32 10 M32 32 L51 21 M32 32 L51 43 M32 32 L32 54 M32 32 L13 43 M32 32 L13 21"
+          stroke-width="1.35" opacity="0.55"/>
+  </g>
+
+  <circle cx="32" cy="32" r="3.6" fill="#ffffff"/>
+  <g fill="#ffffff" opacity="0.88">
+    <circle cx="32" cy="10" r="2.6"/>
+    <circle cx="51" cy="21" r="2.6"/>
+    <circle cx="51" cy="43" r="2.6"/>
+    <circle cx="32" cy="54" r="2.6"/>
+    <circle cx="13" cy="43" r="2.6"/>
+    <circle cx="13" cy="21" r="2.6"/>
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+# dsh-rea bundle patch：把 REA 工具挂进 profile 的层栈
+- insert:
+    - id: dsh-rea
+      name: 'dsh-rea'
+      config:
+        enabled: true

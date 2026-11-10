@@ -1,0 +1,52 @@
+{
+  "name": "dsh-ponytail-lazy",
+  "version": "0.1.0",
+  "description": "让AI自动应用Ponytail的'聪明懒'原则，写出更精简、更高质量的代码",
+  "main": "./index.js",
+  "type": "module",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "profile": {
+      "name": "ponytail-lazy",
+      "description": "AI代码优化助手，实时应用Ponytail"
+    },
+    "market": {
+      "label": "少说废话（让 AI 直接干活）",
+      "group": "5 · 小工具"
+    }
+  },
+  "cordis": {
+    "name": "ponytail-lazy",
+    "description": "实时代码优化引擎"
+  },
+  "peerDependencies": {
+    "cordis": "^1.4.0",
+    "@deepseek-ai/dsh": "^0.2.1-rc.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "ponytail",
+    "code-optimization",
+    "lazy-coding",
+    "ai-assistant",
+    "code-quality",
+    "development"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/dsh-ponytail-lazy.git"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  }
+}

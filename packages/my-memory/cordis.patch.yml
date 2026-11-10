@@ -1,0 +1,17 @@
+# my-memory bundle patch: inserts this plugin into a profile's layer stack.
+# Applied when a profile lists this bundle. The row references the package by
+# name so Node resolution finds the installed code.
+- insert:
+    - id: my-memory
+      name: 'my-memory'
+      config:
+        enabled: true
+        projectDir: '.my-memory'
+        # 每轮命中条数：上游 meow-memory 只给 2 条，这里 2+2 合并后截断到 3
+        hitTopK: 2
+        vectorTopK: 2
+        # 上下文阈值：V3.2 实际只能吃到标称窗口一半，45% 提醒、50% 必须交接
+        contextWarnRatio: 0.45
+        contextHandoffRatio: 0.5
+        reflect: true
+        reflectTurns: 7

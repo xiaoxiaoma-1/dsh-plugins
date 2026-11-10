@@ -1,0 +1,42 @@
+{
+  "name": "dsh-shot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "截图面板：侧栏快门按钮，点一下选窗口/屏幕截图，存盘并把路径填进输入框",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./client": {
+      "default": "./client.js"
+    },
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "package.json"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    },
+    "market": {
+      "label": "截图面板（侧栏快门）",
+      "group": "3 · 桌面交互",
+      "tag": "needs-scripts"
+    }
+  }
+}

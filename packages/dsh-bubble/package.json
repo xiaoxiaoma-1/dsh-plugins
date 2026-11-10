@@ -1,0 +1,49 @@
+{
+  "name": "dsh-bubble",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "通用悬浮气泡：任何插件都能往上推任务状态（进行中/完成/失败），右下角常驻，点开看全部任务",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "bubble",
+    "notification",
+    "progress"
+  ],
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./client": {
+      "default": "./client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "package.json"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    },
+    "market": {
+      "label": "悬浮球（常驻右下角看状态）",
+      "group": "3 · 桌面交互",
+      "tag": "needs-scripts"
+    }
+  },
+  "license": "ISC"
+}

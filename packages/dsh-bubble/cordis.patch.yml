@@ -1,0 +1,6 @@
+# 通用悬浮气泡：任何插件都能往上推任务状态
+- insert:
+    - id: dsh-bubble
+      name: 'dsh-bubble'
+      config:
+        enabled: true

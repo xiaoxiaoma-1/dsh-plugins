@@ -1,0 +1,7 @@
+# dsh-call bundle patch：把通话面板插进 profile 的层栈。
+# 被 profile 的 dsh.profile.bundles 引用后生效。
+- insert:
+    - id: dsh-call
+      name: 'dsh-call'
+      config:
+        enabled: true

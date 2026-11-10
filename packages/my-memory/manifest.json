@@ -1,0 +1,9 @@
+{
+  "name": "my-memory",
+  "version": "2.0.0",
+  "description": "心印 (my-memory) — cross-session memory plugin for DeepSeek Harness: 7-layer SQLite store, context-aware injection, progress line / handoff notes, auto-drafted experience packs, project anchoring, and the 脉络 relationship graph panel.",
+  "main": "index.js",
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.5"
+  }
+}

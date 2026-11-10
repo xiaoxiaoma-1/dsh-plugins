@@ -1,0 +1,6 @@
+# dsh-ziwei bundle patch：把算命工作台挂进 profile 层栈
+- insert:
+    - id: dsh-ziwei
+      name: 'dsh-ziwei'
+      config:
+        enabled: true

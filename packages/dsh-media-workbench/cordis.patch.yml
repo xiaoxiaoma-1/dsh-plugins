@@ -1,0 +1,6 @@
+# 自媒体工作台：客户端插件为主，宿主端 V0 只占位（后续加抓取/转写工具）
+- insert:
+    - id: dsh-media-workbench
+      name: 'dsh-media-workbench'
+      config:
+        enabled: true

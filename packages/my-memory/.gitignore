@@ -1,0 +1,8 @@
+﻿node_modules/
+*.backup_*
+*.full-ui-backup
+*.bak
+*.orig
+*.log
+.DS_Store
+Thumbs.db

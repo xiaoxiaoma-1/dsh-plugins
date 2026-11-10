@@ -1,0 +1,52 @@
+# 依赖
+node_modules/
+.pnpm-store/
+
+# 构建产物
+dist/
+build/
+out/
+
+# 本地数据与状态
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.log
+*.pid
+.pipeline_state.json
+.pipeline_status.json
+.follow_status.json
+.pause_record
+
+# 备份与临时文件
+*.bak
+*.bak-*
+*.backup
+*.orig
+*~
+*.tmp
+.tmp/
+
+# 密钥与凭据（绝不提交）
+.env
+.env.*
+*.pem
+*.key
+api-key
+credentials*
+secrets*
+*.token
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+
+# 临时/备份目录，绝不提交
+.git_old*/
+.git_bak*/

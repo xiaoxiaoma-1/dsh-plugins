@@ -1,0 +1,42 @@
+{
+  "name": "dsh-ziwei",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "紫微斗数算命工作台（MVP）：侧栏入口 + 整页命盘面板，排盘基于 iztro",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./client": {
+      "default": "./client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "package.json"
+  ],
+  "dependencies": {
+    "iztro": "^2.6.3"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    },
+    "market": {
+      "label": "紫微斗数排盘",
+      "group": "5 · 小工具"
+    }
+  }
+}

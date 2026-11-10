@@ -1,0 +1,6 @@
+# 工作台合集：客户端插件为主，宿主端只负责占位（无需注册接口）
+- insert:
+    - id: dsh-workbench-hub
+      name: 'dsh-workbench-hub'
+      config:
+        enabled: true

@@ -1,0 +1,6 @@
+# 经济体检工作台：客户端提供卡片，宿主端提供数据与「一键更新」
+- insert:
+    - id: dsh-finance-health
+      name: 'dsh-finance-health'
+      config:
+        enabled: true

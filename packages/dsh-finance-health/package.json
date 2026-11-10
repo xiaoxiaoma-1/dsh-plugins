@@ -1,0 +1,48 @@
+{
+  "name": "dsh-finance-health",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "经济体检工作台：宏观指标 + 五段判断 + 一键更新数据",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "workbench",
+    "finance"
+  ],
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./client": {
+      "default": "./client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "package.json"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    },
+    "market": {
+      "label": "经济体检",
+      "group": "5 · 小工具",
+      "tag": "needs-scripts"
+    }
+  },
+  "license": "ISC"
+}

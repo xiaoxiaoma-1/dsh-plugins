@@ -1,0 +1,7 @@
+# dsh-ponytail-lazy bundle patch: mounts the plugin into the host composition.
+# 该插件只做一件事：向系统提示注入 Ponytail 代码优化原则。
+- insert:
+    - id: ponytail-lazy
+      name: dsh-ponytail-lazy
+      config:
+        enabled: true

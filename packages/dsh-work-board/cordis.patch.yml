@@ -1,0 +1,11 @@
+# dsh-work-board bundle patch：把看板插进 profile 的层栈。
+# 被 profile 的 dsh.profile.bundles 引用后生效；行内按包名引用，Node 解析到已安装代码。
+- insert:
+    - id: dsh-work-board
+      name: 'dsh-work-board'
+      config:
+        enabled: true
+        # 本轮真有产出（改文件/跑命令）才把「进行中」推到「阶段完成」
+        autoStage: true
+        # 看板数据目录（相对 $DSH_HOME），全局一份，跨工作区共用一个总盘
+        storeDir: 'work-board'

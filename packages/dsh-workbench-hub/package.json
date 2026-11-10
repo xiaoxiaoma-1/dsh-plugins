@@ -1,0 +1,45 @@
+{
+  "name": "dsh-workbench-hub",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "工作台合集：侧栏一个「工作台」入口，里面列出各工作台（算命、自媒体…），点进去才是具体面板",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "workbench"
+  ],
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./client": {
+      "default": "./client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    },
+    "market": {
+      "label": "工作台入口（侧边栏那个「工作台」）",
+      "group": "2 · 工作台"
+    }
+  },
+  "main": "index.js",
+  "license": "ISC"
+}

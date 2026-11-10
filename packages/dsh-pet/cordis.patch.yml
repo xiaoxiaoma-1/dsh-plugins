@@ -1,0 +1,6 @@
+## dsh-pet —— 桌面宠物（Grok Bot）
+- insert:
+    - id: dsh-pet
+      name: 'dsh-pet'
+      config:
+        enabled: true

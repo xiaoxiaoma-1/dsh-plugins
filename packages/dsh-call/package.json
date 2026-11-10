@@ -1,0 +1,42 @@
+{
+  "name": "dsh-call",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "通话面板：侧栏打电话按钮，点开即全屏语音对话，说完自动提问、回复自动朗读",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./client": {
+      "default": "./client.js"
+    },
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "icon.svg",
+    "package.json"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    },
+    "market": {
+      "label": "语音通话（说完自动提问、回复朗读）",
+      "group": "4 · 语音",
+      "tag": "needs-scripts"
+    }
+  }
+}

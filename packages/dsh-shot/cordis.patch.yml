@@ -1,0 +1,7 @@
+# dsh-shot bundle patch：把截图按钮插进 profile 的层栈。
+# 被 profile 的 dsh.profile.bundles 引用后生效。
+- insert:
+    - id: dsh-shot
+      name: 'dsh-shot'
+      config:
+        enabled: true

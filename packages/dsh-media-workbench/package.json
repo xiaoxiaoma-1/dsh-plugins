@@ -1,0 +1,51 @@
+{
+  "name": "dsh-media-workbench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "自媒体工作台：App 首页式卡片墙，9 张卡覆盖采集/稿库/拆解/选题/观点/对撞/复盘",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "workbench",
+    "media"
+  ],
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./client": {
+      "default": "./client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "package.json"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    },
+    "market": {
+      "label": "自媒体工作台（采集/选题/成稿/剪辑）",
+      "group": "2 · 工作台",
+      "tag": "needs-scripts"
+    },
+    "requires": [
+      "dsh-workbench-hub"
+    ]
+  },
+  "license": "ISC"
+}

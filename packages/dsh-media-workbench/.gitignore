@@ -1,0 +1,15 @@
+node_modules/
+dist/
+build/
+*.log
+*.bak
+*.orig
+*.backup
+*~
+.DS_Store
+Thumbs.db
+.env
+.env.*
+.credentials*
+*.pem
+*.key

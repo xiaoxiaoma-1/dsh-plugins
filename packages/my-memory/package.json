@@ -1,0 +1,69 @@
+{
+  "name": "my-memory",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "心印 (my-memory) — cross-session memory plugin for DeepSeek Harness: 7-layer SQLite store, context-aware injection (title index + on-demand full read), progress line / handoff notes for cross-window continuity, auto-drafted experience packs, project anchoring with drift self-check, and the 脉络 relationship graph panel.",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "memory",
+    "agent-memory",
+    "semantic-search"
+  ],
+  "exports": {
+    ".": {
+      "default": "./index.js"
+    },
+    "./client": {
+      "default": "./client.js"
+    },
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "db.js",
+    "bm25.js",
+    "embed.js",
+    "tools.js",
+    "inject.js",
+    "reflect.js",
+    "meter.js",
+    "turn-summaries.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    },
+    "market": {
+      "label": "心印 · 长期记忆（七层+经验包+脉络图）",
+      "group": "1 · 记忆与看板"
+    }
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.5"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "dsh-pet",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Grok Bot 桌面宠物：挂在桌面上（窗口外）、眼睛跟随鼠标、点一下弹出对话进度菜单，截图只是其中一项",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "pet",
+    "desktop",
+    "grok"
+  ],
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "pet",
+    "cordis.patch.yml",
+    "package.json"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "market": {
+      "label": "桌面宠物（桌面外挂着报进度）",
+      "group": "3 · 桌面交互",
+      "tag": "needs-scripts"
+    }
+  },
+  "license": "ISC"
+}
