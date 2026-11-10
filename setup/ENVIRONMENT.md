@@ -64,18 +64,22 @@ openai / requests / httpx  调用模型接口
 
 **这些不是"装环境"，是"拉模型"。不装也能用 11 个插件，只是播客台、变声、数字人这几条线跑不了。**
 
-| # | 东西 | 原机体积 | 干什么 |
-|---|---|---|---|
-| M1 | soulx-podcast | 11.3GB | 高质量双人对谈 TTS（播客主档） |
-| M2 | CosyVoice | 11.2GB | 声音克隆 |
-| M3 | GPT-SoVITS（sovits） | 22.8GB | 音色训练与合成 |
-| M4 | RVC | 18.4GB | 实时变声 |
-| M5 | dfnet | 4.7GB | 人声分离 |
-| M6 | mineru | 0.6GB | PDF 解析（书库入库） |
+| # | 东西 | 官方仓库 | 原机体积 | 干什么 | 显存 |
+|---|---|---|---|---|---|
+| M1 | soulx-podcast | `Soul-AILab/SoulX-Podcast`（权重 1.7B / 5.36GB） | 11.3GB | 高质量双人对谈 TTS（播客主档） | 8–10GB |
+| M2 | CosyVoice | `QwenAudio/CosyVoice`（权重 CosyVoice2-0.5B / 5.23GB） | 11.2GB | 声音克隆、零样本配音 | 6–8GB |
+| M3 | sovits | **so-vits-svc** `svc-develop-team/so-vits-svc`（**不是 GPT-SoVITS**） | 22.8GB | 歌声转换 | 4–6GB |
+| M4 | RVC | RVC 官方整合包（带 runtime + ffmpeg） | 18.4GB | 实时变声 | 4–6GB |
+| M5 | dfnet | 人声分离环境（`audio-separator`） | 4.7GB | 从音频里拆人声/伴奏 | CPU 可跑 |
+| M6 | mineru | `opendatalab/MinerU` 4.x | 0.6GB | PDF 解析（书库入库） | CPU 可跑 |
 
 六项合计约 **69GB**。原机全放在 `E:\tools\` 下，每个目录自带 venv 和权重。
 
-新机器上不追求一次拉全。用哪条线拉哪个，装法记在各自的模型仓库 README 里，这里只保证：**装完之后路径和原机一致，插件不用改代码。**
+**逐步部署方法全在 [`setup/models/README.md`](models/README.md)**：每项写清前置条件、拉代码、权重放哪个目录、建环境、启动、怎么验证通了、装不上怎么降级。
+
+**装之前必须问用户三句**：显卡什么型号（低于表里显存会 OOM）、磁盘还剩多少（四项全装 65GB）、这条线你到底用不用。不问就装，等于让人白下几十 G。
+
+**注意**：RVC 的 `assets/*.index` 和 so-vits-svc 的 `logs/` 是原机主人自己训练的私人音色，不在仓库里，别人要自己训。
 
 ---
 
